@@ -1,0 +1,26 @@
+Classe Player
+- Posição inicial
+- Posição de saida
+- Posição final
+- Movimentação
+- Numero de peças
+- Turno
+
+Classe Menu -> Singleton
+- Botão de 'Novo Jogo'
+- Botão de 'Carregar Jogo'
+- Botão de 'Salvar'
+- Botão de 'Lançar Dado'
+- Desenho da imagem do dado e de quem é a vez
+
+Classe Regras -> Observer
+- Regras de Barreira
+- Regras de Captura
+- Regras de Abrigo
+- Regras sobre o 6
+- Regras sobre condição de vitória
+
+Classe Tabuleiro -> Singleton
+- Desenho do Tabuleiro
+- Desenho da Posição das Peças
+- Desenho da Imagem do Dado
