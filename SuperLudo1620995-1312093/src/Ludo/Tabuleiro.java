@@ -21,7 +21,7 @@ public class Tabuleiro extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBounds(0, 0, 905,905);	
+		setBounds(0, 0, 901,901);	
 		setBackground(Color.WHITE);
 		
 		for(int i = 0;i < _casas.GetCount();i++)
