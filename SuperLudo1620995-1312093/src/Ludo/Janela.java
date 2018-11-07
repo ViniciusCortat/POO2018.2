@@ -1,9 +1,10 @@
+package Ludo;
 import java.awt.*;
 import javax.swing.*;
 
 public class Janela extends JFrame {
 	private static final int LARGURA = 1200;
-	private static final int ALTURA = 900;
+	private static final int ALTURA = 1200;
 	
 	public Janela() {
 		setTitle("Super Ludo");

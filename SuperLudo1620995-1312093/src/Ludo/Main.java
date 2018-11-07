@@ -1,3 +1,4 @@
+package Ludo;
 
 public class Main {
 	
