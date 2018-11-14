@@ -1,5 +1,6 @@
 package Ludo;
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -15,14 +16,59 @@ public class Tabuleiro extends JPanel {
 	public Tabuleiro() {
 		setLayout(null);
 		repaint();
+		setBounds(0, 0, 901,901);
 		_casas =  new Casas(225);
 		System.out.println(_casas.ToString());
+		addMouseListener(new MouseAdapter() { // Mouse Coordinates on Click
+			public void mousePressed(MouseEvent e) {
+				int mouseX = e.getX();
+				int mouseY = e.getY();
+				if(mouseX < 60) {
+					mouseX = 0;
+				}
+				else {
+					mouseX = mouseX/60;
+				}
+				if(mouseY < 60) {
+					mouseY = 0;
+				}
+				else {
+					mouseY = mouseY/60;
+				}
+				System.out.println(mouseX + "," + mouseY);
+			}
+		});
 	}
 	
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		setBounds(0, 0, 901,901);	
+		super.paintComponent(g);	
 		setBackground(Color.WHITE);
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, Largura, Altura); // Draw red square
+		int[] RedTriX = {360,360,450};
+		int[] RedTriY = {360,540,450};
+		
+		g.setColor(Color.BLUE);		
+		g.fillRect(0, 540, Largura, Altura); // Draw blue square
+		int[] BlueTriX = {360,540,450};
+		int[] BlueTriY = {540,540,450};
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(540, 0, Largura, Altura); // Draw green square
+		int[] GreenTriX = {360,540,450};
+		int[] GreenTriY = {360,360,450};
+		
+		g.setColor(Color.YELLOW);
+		int[] YellowTriX = {540,540,450};
+		int[] YellowTriY = {540,360,450};
+		g.fillRect(540, 540, Largura, Altura );
+		
+		g.setColor(Color.BLACK);
+		
+        g.drawRect(0, 0, Largura, Altura);
+		g.drawRect(0, 540, Largura, Altura);
+		g.drawRect(540, 0, Largura, Altura);
+		g.drawRect(540, 540, Largura, Altura );
 		
 		for(int i = 0;i < _casas.GetCount();i++)
 		{
@@ -69,6 +115,13 @@ public class Tabuleiro extends JPanel {
 				g.setColor(Color.BLACK);			
 				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
 			}
+			else if(value == 6)
+			{
+				g.setColor(Color.WHITE);
+				g.fillOval(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawOval(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
 			else if(value == 0)
 			{
 				g.setColor(Color.BLACK);			
@@ -76,39 +129,21 @@ public class Tabuleiro extends JPanel {
 			}
 		}
 		g.setColor(Color.RED);
-		g.fillRect(0, 0, Largura, Altura); // Draw red square
-		int[] RedTriX = {360,360,450};
-		int[] RedTriY = {360,540,450};
 		g.fillPolygon(RedTriX, RedTriY, 3); // Draw fill red Triag
 		
-		g.setColor(Color.BLUE);		
-		g.fillRect(0, 540, Largura, Altura); // Draw blue square
-		int[] BlueTriX = {360,540,450};
-		int[] BlueTriY = {540,540,450};
+		g.setColor(Color.BLUE);
 		g.fillPolygon(BlueTriX, BlueTriY, 3); // Draw fill blue Triag
 		
 		g.setColor(Color.GREEN);
-		g.fillRect(540, 0, Largura, Altura); // Draw green square
-		int[] GreenTriX = {360,540,450};
-		int[] GreenTriY = {360,360,450};
 		g.fillPolygon(GreenTriX, GreenTriY, 3); // Draw fill green Triag
 		
 		g.setColor(Color.YELLOW);
-		int[] YellowTriX = {540,540,450};
-		int[] YellowTriY = {540,360,450};
 		g.fillPolygon(YellowTriX, YellowTriY, 3); // Draw fill green Triag
-		g.fillRect(540, 540, Largura, Altura );
 		
 		g.setColor(Color.BLACK);
-		
 		g.drawPolygon(RedTriX, RedTriY, 3);
 		g.drawPolygon(BlueTriX, BlueTriY, 3);
 		g.drawPolygon(GreenTriX, GreenTriY, 3);
 		g.drawPolygon(YellowTriX, YellowTriY, 3);
-		
-        g.drawRect(0, 0, Largura, Altura);
-		g.drawRect(0, 540, Largura, Altura);
-		g.drawRect(540, 0, Largura, Altura);
-		g.drawRect(540, 540, Largura, Altura );
 	}
 }
