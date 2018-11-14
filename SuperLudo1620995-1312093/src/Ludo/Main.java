@@ -1,3 +1,4 @@
+
 package Ludo;
 
 public class Main {
@@ -6,7 +7,7 @@ public class Main {
 		Janela j = new Janela();
 		Menu m = new Menu();
 		Tabuleiro t = new Tabuleiro();
+		j.add(m);
 		j.add(t);
-		//j.add(m);
 	}
 }
