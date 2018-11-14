@@ -51,6 +51,31 @@ public class Casas
 			
 			Matrix[13][6] = 4;
 			Matrix[13][8] = 5;
+			
+			Matrix[1][1] = 6; // WHITE CIRCLE
+			Matrix[1][4] = 6;
+			
+			Matrix[4][1] = 6;
+			Matrix[4][4] = 6;
+			
+			Matrix[1][10] = 6;
+			Matrix[4][10] = 6;
+			
+			Matrix[4][13] = 6;
+			Matrix[1][13] = 6;
+			
+			Matrix[13][4] = 6;
+			Matrix[13][1] = 6;
+			
+			Matrix[10][1] = 6;
+			Matrix[10][4] = 6;
+			
+			Matrix[10][13] = 6;
+			Matrix[13][10] = 6;
+			
+			Matrix[10][10] = 6;
+			Matrix[13][13] = 6;
+			
 	}
 	
 	public Integer GetDimension()
