@@ -62,6 +62,13 @@ public class Tabuleiro extends JPanel {
 				g.setColor(Color.BLACK);			
 				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
 			}
+			else if(value == 5)
+			{
+				g.setColor(Color.BLACK);
+				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
 			else if(value == 0)
 			{
 				g.setColor(Color.BLACK);			
