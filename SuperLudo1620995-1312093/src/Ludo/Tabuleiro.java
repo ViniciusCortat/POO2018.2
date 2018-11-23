@@ -9,6 +9,10 @@ public class Tabuleiro extends JPanel {
 	private int Largura = 360;
 	private int Altura = 360;
 	private Casas _casas;
+	Player play1 = new Player(1);
+	Player play2 = new Player(2);
+	Player play3 = new Player(3);
+	Player play4 = new Player(4);
 	
 	//frame final size 885x861
 	//square size must be 60x60
@@ -145,5 +149,28 @@ public class Tabuleiro extends JPanel {
 		g.drawPolygon(BlueTriX, BlueTriY, 3);
 		g.drawPolygon(GreenTriX, GreenTriY, 3);
 		g.drawPolygon(YellowTriX, YellowTriY, 3);
+		
+		
+		for(int i = 0;i < 4;i++) { // DRAW Players Pawns
+			g.setColor(Color.RED);
+			g.fillOval(play1.pecas.get(i).posX*60+15, play1.pecas.get(i).posY*60+15, 30, 30); 
+			g.setColor(Color.BLACK);			
+			g.drawOval(play1.pecas.get(i).posX*60+15, play1.pecas.get(i).posY*60+15, 30, 30);
+			
+			g.setColor(Color.GREEN);
+			g.fillOval(play2.pecas.get(i).posX*60+15, play2.pecas.get(i).posY*60+15, 30, 30); 
+			g.setColor(Color.BLACK);			
+			g.drawOval(play2.pecas.get(i).posX*60+15, play2.pecas.get(i).posY*60+15, 30, 30);
+			
+			g.setColor(Color.BLUE);
+			g.fillOval(play3.pecas.get(i).posX*60+15, play3.pecas.get(i).posY*60+15, 30, 30); 
+			g.setColor(Color.BLACK);			
+			g.drawOval(play3.pecas.get(i).posX*60+15, play3.pecas.get(i).posY*60+15, 30, 30);
+			
+			g.setColor(Color.YELLOW);
+			g.fillOval(play4.pecas.get(i).posX*60+15, play4.pecas.get(i).posY*60+15, 30, 30); 
+			g.setColor(Color.BLACK);			
+			g.drawOval(play4.pecas.get(i).posX*60+15, play4.pecas.get(i).posY*60+15, 30, 30);
+		}
 	}
 }
