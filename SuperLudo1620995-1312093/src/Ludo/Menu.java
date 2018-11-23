@@ -9,12 +9,26 @@ import java.util.*;
 
 
 public class Menu extends JPanel {
+	
+	 private static Menu instance = null;
+	
 	JButton novo_jogo = new JButton("Novo Jogo");
 	JButton carrega_jogo = new JButton("Carregar Jogo");
 	JButton salva_jogo = new JButton("Salvar");
 	JButton lanca_dado = new JButton("Lançar Dado");
 	
+	int dado;
+	
+	int turno = 1;
+	
 	private BufferedImage _dadoImagem;
+	
+	public static  Menu getInstance() {
+		if(instance == null) {
+			instance = new Menu();
+		}
+		return instance;
+	}
 	
 	public Menu() {
 		setLayout(null);
@@ -31,7 +45,7 @@ public class Menu extends JPanel {
 		lanca_dado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Random rand = new Random();
-				int dado = rand.nextInt(6) + 1;
+				dado = rand.nextInt(6) + 1;
 				System.out.println(dado);
 				if(dado == 1) {
 					try {
@@ -84,6 +98,19 @@ public class Menu extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.GRAY);
+		if(turno == 1) {
+			g.setColor(Color.RED);
+		}
+		else if(turno == 2) {
+			g.setColor(Color.GREEN);
+		}
+		else if(turno == 3) {
+			g.setColor(Color.BLUE);
+		}
+		else if(turno == 4) {
+			g.setColor(Color.YELLOW);
+		}
+		g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
 		g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
 	}
 	
