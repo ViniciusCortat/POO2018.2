@@ -17,7 +17,7 @@ public class Menu extends JPanel {
 	JButton salva_jogo = new JButton("Salvar");
 	JButton lanca_dado = new JButton("Lançar Dado");
 	
-	int dado;
+	int dado = 1;
 	
 	int turno = 1;
 	
@@ -42,7 +42,8 @@ public class Menu extends JPanel {
 		add(salva_jogo);
 		lanca_dado.setBounds(30, 570, 240, 60);
 		add(lanca_dado);
-		lanca_dado.addActionListener(new ActionListener() {
+		lanca_dado.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e) {
 				Random rand = new Random();
 				dado = rand.nextInt(6) + 1;
@@ -88,8 +89,7 @@ public class Menu extends JPanel {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}
-				
+				}				
 				repaint();
 			}
 		});
@@ -110,8 +110,8 @@ public class Menu extends JPanel {
 		else if(turno == 4) {
 			g.setColor(Color.YELLOW);
 		}
-		g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
-		g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
+		//g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
+		//g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
 	}
 	
 }

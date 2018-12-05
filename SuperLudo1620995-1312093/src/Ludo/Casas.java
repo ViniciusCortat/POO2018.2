@@ -21,7 +21,7 @@ public class Casas
 		{
 			for(int j = 0;j < Dimension;j++)
 			{
-				Matrix[i][j] = -1;					 
+				Matrix[i][j] = -1;
 			}
 		}
 		for(int i = 0;i < 3;i++) // Draw black squares
@@ -76,6 +76,26 @@ public class Casas
 			Matrix[10][10] = 6;
 			Matrix[13][13] = 6;
 			
+			for(int i =0;i < Dimension;i++) // Reset the hole matrix
+			{
+				for(int j = 0;j < Dimension;j++)
+				{
+					if((i == 6 || i == 8 || i == 0 || i == 14) && (j == 0 || j == 14 || j == 6 || j == 8))
+					{
+						Matrix[i][j] = -2;
+					}
+					else if((i == 0 || i == 7 || i == 14) && (j == 0 || j == 7 || j == 14))
+					{
+						Matrix[i][j] = -4;
+					}
+				}
+			}
+			
+			Matrix[6][6] = -3;
+			Matrix[6][8] = -3;
+			
+			Matrix[8][6] = -3;
+			Matrix[8][8] = -3;			
 	}
 	
 	public Integer GetDimension()

@@ -1,6 +1,7 @@
 package Ludo;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -14,6 +15,8 @@ public class Tabuleiro extends JPanel {
 	Player play3 = new Player(3);
 	Player play4 = new Player(4);
 	
+	ArrayList<Player> ListPlayers = new ArrayList<Player>();
+	
 	//frame final size 885x861
 	//square size must be 60x60
 	
@@ -23,6 +26,14 @@ public class Tabuleiro extends JPanel {
 		setBounds(0, 0, 901,901);
 		_casas =  new Casas(225);
 		System.out.println(_casas.ToString());
+		
+		
+		ListPlayers.add(play1);
+		ListPlayers.add(play2);
+		ListPlayers.add(play3);
+		ListPlayers.add(play4);
+		
+		
 		addMouseListener(new MouseAdapter() { // Mouse Coordinates on Click
 			public void mousePressed(MouseEvent e) {
 				int mouseX = e.getX();
@@ -40,6 +51,34 @@ public class Tabuleiro extends JPanel {
 					mouseY = mouseY/60;
 				}
 				System.out.println(mouseX + "," + mouseY);
+				Peao clickP = ListPlayers.get(0).GetPeao(mouseX,mouseY);
+				if(clickP != null)
+				{
+					System.out.println("PCLICK:  " + clickP.GetPosX() + "..." + clickP.GetPosX());
+					//TESTING MOVE
+					for(int i = 0;i < 4;i++)
+					{
+						clickP.Move(1);
+						if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -2)
+						{
+							clickP.ChangeDirClock();
+						}
+						else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -3)
+						{
+							clickP.ChangeDirCouClock();
+							i--;
+						}
+						else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -4)
+						{
+							if(clickP.GetQtdWalked() > 51)
+							{
+								clickP.ChangeDirClock();
+							}
+						}							
+					}
+					if(clickP.PrimeiroMov) clickP.PrimeiroMov = false;
+					repaint();
+				}
 			}
 		});
 	}
@@ -83,6 +122,29 @@ public class Tabuleiro extends JPanel {
 			int _posX = _row*60;
 			int _posY = _col*60;
 			
+			if(value == -4) // TEST CHANGE DIR
+			{
+				g.setColor(Color.LIGHT_GRAY);
+				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
+			
+			if(value == -3) // TEST CHANGE DIR
+			{
+				g.setColor(Color.MAGENTA);
+				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
+			
+			if(value == -2) // TEST CHANGE DIR
+			{
+				g.setColor(Color.CYAN);
+				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
 			
 			if(value == 1)
 			{
@@ -132,6 +194,7 @@ public class Tabuleiro extends JPanel {
 				g.drawRect(_posX, _posY, 60, 60);
 			}
 		}
+		/*
 		g.setColor(Color.RED);
 		g.fillPolygon(RedTriX, RedTriY, 3); // Draw fill red Triag
 		
@@ -143,7 +206,7 @@ public class Tabuleiro extends JPanel {
 		
 		g.setColor(Color.YELLOW);
 		g.fillPolygon(YellowTriX, YellowTriY, 3); // Draw fill green Triag
-		
+		*/
 		g.setColor(Color.BLACK);
 		g.drawPolygon(RedTriX, RedTriY, 3);
 		g.drawPolygon(BlueTriX, BlueTriY, 3);
@@ -153,24 +216,24 @@ public class Tabuleiro extends JPanel {
 		
 		for(int i = 0;i < 4;i++) { // DRAW Players Pawns
 			g.setColor(Color.RED);
-			g.fillOval(play1.pecas.get(i).posX*60+15, play1.pecas.get(i).posY*60+15, 30, 30); 
+			g.fillOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
-			g.drawOval(play1.pecas.get(i).posX*60+15, play1.pecas.get(i).posY*60+15, 30, 30);
+			g.drawOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30);
 			
 			g.setColor(Color.GREEN);
-			g.fillOval(play2.pecas.get(i).posX*60+15, play2.pecas.get(i).posY*60+15, 30, 30); 
+			g.fillOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
-			g.drawOval(play2.pecas.get(i).posX*60+15, play2.pecas.get(i).posY*60+15, 30, 30);
+			g.drawOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30);
 			
 			g.setColor(Color.BLUE);
-			g.fillOval(play3.pecas.get(i).posX*60+15, play3.pecas.get(i).posY*60+15, 30, 30); 
+			g.fillOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
-			g.drawOval(play3.pecas.get(i).posX*60+15, play3.pecas.get(i).posY*60+15, 30, 30);
+			g.drawOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30);
 			
 			g.setColor(Color.YELLOW);
-			g.fillOval(play4.pecas.get(i).posX*60+15, play4.pecas.get(i).posY*60+15, 30, 30); 
+			g.fillOval(play4.pecas.get(i).GetPosX()*60+15, play4.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
-			g.drawOval(play4.pecas.get(i).posX*60+15, play4.pecas.get(i).posY*60+15, 30, 30);
+			g.drawOval(play4.pecas.get(i).GetPosX()*60+15, play4.pecas.get(i).GetPosY()*60+15, 30, 30);
 		}
 	}
 }
