@@ -5,10 +5,23 @@ import java.util.List;
 
 public class Player {
 	
-	int inicioX;
-	int inicioY;	
+	public class Barrier {
+		int posX;
+		int posY;
+		boolean bar;
+		
+		public Barrier() {
+			posX = 50;
+			posY = 50;
+			bar = false;
+		}
+	}
 	
-	boolean turno = false;
+	int inicioX;
+	int inicioY;
+	
+	int fimX;
+	int fimY;
 	
 	List<Peao> pecas = new ArrayList<Peao>();
 
@@ -16,6 +29,9 @@ public class Player {
 	Peao p2 = new Peao();
 	Peao p3 = new Peao();
 	Peao p4 = new Peao();
+	
+	Barrier bar1 = new Barrier();
+	Barrier bar2 = new Barrier();
 	
 	public Player(int cor) {
 
@@ -36,6 +52,12 @@ public class Player {
 				p.SetCasaIni(1, 6);
 				p.SetStartDir(1);
 			}
+			
+			inicioX = 1;
+			inicioY = 6;
+			
+			fimX = 6;
+			fimY = 7;
 		}
 		else if(cor == 2) { // GREEN
 			
@@ -48,6 +70,12 @@ public class Player {
 			{
 				p.SetCasaIni(8, 1);
 			}
+			
+			inicioX = 8;
+			inicioY = 1;
+			
+			fimX = 7;
+			fimY = 6;
 		}
 		else if(cor == 3) { // BLUE
 			
@@ -60,6 +88,12 @@ public class Player {
 			{
 				p.SetCasaIni(6, 13);
 			}
+			
+			inicioX = 6;
+			inicioY = 13;
+			
+			fimX = 7;
+			fimY = 8;
 		}
 		else if(cor == 4) { // YELLOW
 			
@@ -70,8 +104,14 @@ public class Player {
 			
 			for(Peao p : pecas )
 			{
-				p.SetCasaIni(8, 1);
+				p.SetCasaIni(13, 8);
 			}
+			
+			inicioX = 13;
+			inicioY = 8;
+			
+			fimX = 8;
+			fimY = 7;
 		}
 	}
 	
@@ -83,6 +123,19 @@ public class Player {
 				return p;
 		}
 		return null;		
+	}
+	
+	public boolean CheckBar(Barrier b) {
+		for(int i = 0; i < 4; i++) {
+			if(pecas.get(i).GetPosX() == b.posX && pecas.get(i).GetPosY() == b.posY) {
+				for(int j = 0; j < 4; j++) {
+					if(pecas.get(j).GetPosX() == b.posX && pecas.get(j).GetPosY() == b.posY && i != j) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 }

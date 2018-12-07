@@ -10,12 +10,31 @@ public class Tabuleiro extends JPanel {
 	private int Largura = 360;
 	private int Altura = 360;
 	private Casas _casas;
+	
 	Player play1 = new Player(1);
 	Player play2 = new Player(2);
 	Player play3 = new Player(3);
 	Player play4 = new Player(4);
 	
+	public class Abrigo {
+		int posX;
+		int posY;
+		boolean abr;
+		
+		public Abrigo(int x,int y) {
+			posX = x;
+			posY = y;
+			abr = false;
+		}
+	}
+	
+	Abrigo abr1 = new Abrigo(1,8);
+	Abrigo abr2 = new Abrigo(6,1);
+	Abrigo abr3 = new Abrigo(8,13);
+	Abrigo abr4 = new Abrigo(13,6);
+	
 	ArrayList<Player> ListPlayers = new ArrayList<Player>();
+	ArrayList<Abrigo> abrigos = new ArrayList<Abrigo>();
 	
 	//frame final size 885x861
 	//square size must be 60x60
@@ -27,12 +46,15 @@ public class Tabuleiro extends JPanel {
 		_casas =  new Casas(225);
 		System.out.println(_casas.ToString());
 		
-		
 		ListPlayers.add(play1);
 		ListPlayers.add(play2);
 		ListPlayers.add(play3);
 		ListPlayers.add(play4);
 		
+		abrigos.add(abr1);
+		abrigos.add(abr2);
+		abrigos.add(abr3);
+		abrigos.add(abr4);
 		
 		addMouseListener(new MouseAdapter() { // Mouse Coordinates on Click
 			public void mousePressed(MouseEvent e) {
@@ -51,6 +73,32 @@ public class Tabuleiro extends JPanel {
 					mouseY = mouseY/60;
 				}
 				System.out.println(mouseX + "," + mouseY);
+				
+				for(int k = 0; k < 4; k++) { // Check for barriers
+					if(ListPlayers.get(k).CheckBar(ListPlayers.get(k).bar1) == false) {
+						ListPlayers.get(k).bar1.bar = false;
+					}
+					else {
+						ListPlayers.get(k).bar1.bar = true;
+					}
+					if(ListPlayers.get(k).CheckBar(ListPlayers.get(k).bar2) == false) {
+						ListPlayers.get(k).bar2.bar = false;
+					}
+					else {
+						ListPlayers.get(k).bar2.bar = true;
+					}
+				}
+				
+				for(int k = 0; k < 4; k++) { // Check for Abrigos
+					if(CheckAbr(abrigos.get(k)) == true) {
+						abrigos.get(k).abr = true;
+					}
+					else {
+						abrigos.get(k).abr = false;
+					}
+				}
+				
+				// Movement Starts Here
 				Peao clickP = ListPlayers.get(Menu.getInstance().turno).GetPeao(mouseX,mouseY);
 				if(clickP != null)
 				{
@@ -82,6 +130,8 @@ public class Tabuleiro extends JPanel {
 						}							
 					}
 					if(clickP.PrimeiroMov) clickP.PrimeiroMov = false;
+					
+				// Movement Ends Here
 					repaint();
 				}
 			}
@@ -220,6 +270,114 @@ public class Tabuleiro extends JPanel {
 		
 		
 		for(int i = 0;i < 4;i++) { // DRAW Players Pawns
+			for(int j = 0;j < 4; j++) { // DRAW Barrier
+				if(play1.pecas.get(i).GetPosX() == play1.pecas.get(j).GetPosX() &&
+				   play1.pecas.get(i).GetPosY() == play1.pecas.get(j).GetPosY() && i != j) {
+					for(int d = 0; d < 4; d++) {
+						if(play1.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play1.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) {
+							break;
+						}
+						if(d == 3) {
+							if(play1.bar1.bar == true) {
+								play1.bar2.posX = play1.pecas.get(i).GetPosX();
+								play1.bar2.posX = play1.pecas.get(i).GetPosY();
+							}
+							else {
+								play1.bar1.posX = play1.pecas.get(i).GetPosX();
+								play1.bar1.posX = play1.pecas.get(i).GetPosY();
+							}
+							
+							g.setColor(Color.WHITE);
+							g.fillOval(play1.pecas.get(i).GetPosX()*60+5, play1.pecas.get(i).GetPosY()*60+5, 50, 50);
+							g.setColor(Color.RED);
+							g.drawOval(play1.pecas.get(i).GetPosX()*60+5, play1.pecas.get(i).GetPosY()*60+5, 50, 50);
+						}
+					}
+				}
+			}
+			
+			for(int j = 0;j < 4; j++) { // DRAW Barrier
+				if(play2.pecas.get(i).GetPosX() == play2.pecas.get(j).GetPosX() &&
+				   play2.pecas.get(i).GetPosY() == play2.pecas.get(j).GetPosY() && i != j) {
+					for(int d = 0; d < 4; d++) {
+						if(play2.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play2.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) {
+							break;
+						}
+						if(d == 3) {
+							if(play2.bar1.bar == true) {
+								play2.bar2.posX = play2.pecas.get(i).GetPosX();
+								play2.bar2.posX = play2.pecas.get(i).GetPosY();
+							}
+							else {
+								play2.bar1.posX = play2.pecas.get(i).GetPosX();
+								play2.bar1.posX = play2.pecas.get(i).GetPosY();
+							}
+							
+							g.setColor(Color.WHITE);
+							g.fillOval(play2.pecas.get(i).GetPosX()*60+5, play2.pecas.get(i).GetPosY()*60+12, 50, 50);
+							g.setColor(Color.GREEN);
+							g.drawOval(play2.pecas.get(i).GetPosX()*60+5, play2.pecas.get(i).GetPosY()*60+12, 50, 50);
+						}
+					}
+				}
+			}
+			
+			for(int j = 0;j < 4; j++) { // DRAW Barrier
+				if(play3.pecas.get(i).GetPosX() == play3.pecas.get(j).GetPosX() &&
+				   play3.pecas.get(i).GetPosY() == play3.pecas.get(j).GetPosY() && i != j) {
+					for(int d = 0; d < 4; d++) {
+						if(play3.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play3.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) {
+							break;
+						}
+						if(d == 3) {
+							if(play3.bar1.bar == true) {
+								play3.bar2.posX = play3.pecas.get(i).GetPosX();
+								play3.bar2.posX = play3.pecas.get(i).GetPosY();
+							}
+							else {
+								play3.bar1.posX = play3.pecas.get(i).GetPosX();
+								play3.bar1.posX = play3.pecas.get(i).GetPosY();
+							}
+							
+							g.setColor(Color.WHITE);
+							g.fillOval(play3.pecas.get(i).GetPosX()*60+5, play3.pecas.get(i).GetPosY()*60+5, 50, 50);
+							g.setColor(Color.BLUE);
+							g.drawOval(play3.pecas.get(i).GetPosX()*60+5, play3.pecas.get(i).GetPosY()*60+5, 50, 50);
+						}
+					}
+				}
+			}
+			
+			for(int j = 0;j < 4; j++) { // DRAW Barrier
+				if(play4.pecas.get(i).GetPosX() == play4.pecas.get(j).GetPosX() &&
+				   play4.pecas.get(i).GetPosY() == play4.pecas.get(j).GetPosY() && i != j) {
+					for(int d = 0; d < 4; d++) {
+						if(play4.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play4.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) {
+							break;
+						}
+						if(d == 3) {
+							if(play4.bar1.bar == true) {
+								play4.bar2.posX = play4.pecas.get(i).GetPosX();
+								play4.bar2.posX = play4.pecas.get(i).GetPosY();
+							}
+							else {
+								play4.bar1.posX = play4.pecas.get(i).GetPosX();
+								play4.bar1.posX = play4.pecas.get(i).GetPosY();
+							}
+							
+							g.setColor(Color.WHITE);
+							g.fillOval(play4.pecas.get(i).GetPosX()*60+5, play4.pecas.get(i).GetPosY()*60+5, 50, 50);
+							g.setColor(Color.YELLOW);
+							g.drawOval(play4.pecas.get(i).GetPosX()*60+5, play4.pecas.get(i).GetPosY()*60+5, 50, 50);
+						}
+					}
+				}
+			}
+			
 			g.setColor(Color.RED);
 			g.fillOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
@@ -239,6 +397,180 @@ public class Tabuleiro extends JPanel {
 			g.fillOval(play4.pecas.get(i).GetPosX()*60+15, play4.pecas.get(i).GetPosY()*60+15, 30, 30); 
 			g.setColor(Color.BLACK);			
 			g.drawOval(play4.pecas.get(i).GetPosX()*60+15, play4.pecas.get(i).GetPosY()*60+15, 30, 30);
+			
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play1 com play2
+				if(play1.pecas.get(i).GetPosX() == play2.pecas.get(j).GetPosX() &&
+				   play1.pecas.get(i).GetPosY() == play2.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play1.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play1.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.GREEN);
+							g.fillOval(play2.pecas.get(i).GetPosX()*60+10, play2.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play2.pecas.get(i).GetPosX()*60+10, play2.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play1 com play3
+				if(play1.pecas.get(i).GetPosX() == play3.pecas.get(j).GetPosX() &&
+				   play1.pecas.get(i).GetPosY() == play3.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play1.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play1.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.BLUE);
+							g.fillOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play1 com play4
+				if(play1.pecas.get(i).GetPosX() == play4.pecas.get(j).GetPosX() &&
+				   play1.pecas.get(i).GetPosY() == play4.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play1.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play1.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.BLUE);
+							g.fillOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play1.pecas.get(i).GetPosX()*60+15, play1.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play2 com play3
+				if(play2.pecas.get(i).GetPosX() == play3.pecas.get(j).GetPosX() &&
+				   play2.pecas.get(i).GetPosY() == play3.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play2.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play2.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.BLUE);
+							g.fillOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play2 com play4
+				if(play2.pecas.get(i).GetPosX() == play4.pecas.get(j).GetPosX() &&
+				   play2.pecas.get(i).GetPosY() == play4.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play2.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play2.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.BLUE);
+							g.fillOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
+			for(int j = 0;j < 4; j++) { //DRAW Abrigo play3 com play4
+				if(play3.pecas.get(i).GetPosX() == play4.pecas.get(j).GetPosX() &&
+				   play3.pecas.get(i).GetPosY() == play4.pecas.get(j).GetPosY()) {
+					for(int d = 0;d < 4; d++) {
+						if((play3.pecas.get(i).GetPosX() == ListPlayers.get(d).inicioX &&
+						   play3.pecas.get(i).GetPosY() == ListPlayers.get(d).inicioY) ||
+						   (play3.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+						   play3.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
+							
+							g.setColor(Color.BLUE);
+							g.fillOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
+							
+							g.setColor(Color.RED);
+							g.fillOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30); 
+							g.setColor(Color.BLACK);			
+							g.drawOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30);
+							
+							if(play3.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
+							   play3.pecas.get(i).GetPosY() == abrigos.get(d).posY) {
+								abrigos.get(d).abr = true;
+							}
+						}
+					}
+				}
+			}
 		}
+	}
+	public boolean CheckAbr(Abrigo a) {
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				if(ListPlayers.get(i).pecas.get(j).GetPosX() == a.posX &&
+				   ListPlayers.get(i).pecas.get(j).GetPosY() == a.posY) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
