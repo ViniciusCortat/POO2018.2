@@ -51,10 +51,15 @@ public class Tabuleiro extends JPanel {
 					mouseY = mouseY/60;
 				}
 				System.out.println(mouseX + "," + mouseY);
-				Peao clickP = ListPlayers.get(0).GetPeao(mouseX,mouseY);
+				Peao clickP = ListPlayers.get(Menu.getInstance().turno).GetPeao(mouseX,mouseY);
 				if(clickP != null)
 				{
+					Menu.getInstance().turno++;
+					if(Menu.getInstance().turno >= 4)
+						Menu.getInstance().turno = 0;
+					Menu.getInstance().lanca_dado.setEnabled(true);
 					System.out.println("PCLICK:  " + clickP.GetPosX() + "..." + clickP.GetPosX());
+					System.out.println("Turno: " + Menu.getInstance().turno);
 					//TESTING MOVE
 					for(int i = 0;i < 4;i++)
 					{

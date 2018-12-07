@@ -15,11 +15,11 @@ public class Menu extends JPanel {
 	JButton novo_jogo = new JButton("Novo Jogo");
 	JButton carrega_jogo = new JButton("Carregar Jogo");
 	JButton salva_jogo = new JButton("Salvar");
-	JButton lanca_dado = new JButton("LanÃ§ar Dado");
+	JButton lanca_dado = new JButton("Lançar Dado");
 	
-	int dado = 1;
+	int dado;
 	
-	int turno = 1;
+	int turno = 0;
 	
 	private BufferedImage _dadoImagem;
 	
@@ -89,7 +89,8 @@ public class Menu extends JPanel {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}				
+				}
+				lanca_dado.setEnabled(false);
 				repaint();
 			}
 		});
@@ -98,20 +99,20 @@ public class Menu extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.GRAY);
-		if(turno == 1) {
+		if(turno == 0) {
 			g.setColor(Color.RED);
 		}
-		else if(turno == 2) {
+		else if(turno == 1) {
 			g.setColor(Color.GREEN);
 		}
-		else if(turno == 3) {
+		else if(turno == 2) {
 			g.setColor(Color.BLUE);
 		}
-		else if(turno == 4) {
+		else if(turno == 3) {
 			g.setColor(Color.YELLOW);
 		}
-		//g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
-		//g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
+		g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
+		g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
 	}
 	
 }
