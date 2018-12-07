@@ -8,5 +8,6 @@ public class Main {
 		Tabuleiro t = new Tabuleiro();
 		j.add(m);
 		j.add(t);
+		j.repaint();
 	}
 }

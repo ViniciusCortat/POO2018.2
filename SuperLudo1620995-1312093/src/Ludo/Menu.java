@@ -31,6 +31,7 @@ public class Menu extends JPanel {
 	}
 	
 	public Menu() {
+		_dadoImagem = null;
 		setLayout(null);
 		repaint();
 		setBounds(901, 0, 293, 902);
@@ -111,8 +112,10 @@ public class Menu extends JPanel {
 		else if(turno == 3) {
 			g.setColor(Color.YELLOW);
 		}
-		g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
-		g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
+		if(_dadoImagem != null) {
+			g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
+			g.drawImage(_dadoImagem, 78, 683, _dadoImagem.getWidth()*3/2, _dadoImagem.getHeight()*3/2, null);
+		}
 	}
 	
 }

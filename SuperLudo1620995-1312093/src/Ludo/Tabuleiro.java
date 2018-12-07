@@ -132,10 +132,12 @@ public class Tabuleiro extends JPanel {
 					if(clickP.PrimeiroMov) clickP.PrimeiroMov = false;
 					
 				// Movement Ends Here
+					Menu.getInstance().repaint();
 					repaint();
 				}
 			}
 		});
+		repaint();
 	}
 	
 	public void paintComponent(Graphics g) {
