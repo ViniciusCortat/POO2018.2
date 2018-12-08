@@ -6,6 +6,9 @@ public class Peao {
 	private int posX;
 	private int posY;
 	
+	private int StartGamePosX;
+	private int StartGamePosY;
+	
 	public boolean PrimeiroMov;
 	private int CurrentDir;
 	
@@ -95,6 +98,17 @@ public class Peao {
 			this.CurrentDir = 3;
 		}
 	}
+	public void SetStartGamePos(int x, int y) {
+		this.StartGamePosX = x;
+		this.StartGamePosY = y;
+	}
+	public int GetStartGamePosX() {
+		return this.StartGamePosX;
+	}
+	public int GetStartGamePosY() {
+		return this.StartGamePosY;
+	}
+	
 		
 		
 	public class Direction

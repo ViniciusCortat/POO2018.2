@@ -47,6 +47,11 @@ public class Player {
 			p3.SetPos(1, 4);
 			p4.SetPos(4, 4);
 			
+			p1.SetStartGamePos(1, 1);
+			p2.SetStartGamePos(4, 1);
+			p3.SetStartGamePos(1, 4);
+			p4.SetStartGamePos(4, 4);
+			
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(1, 6);
@@ -66,6 +71,11 @@ public class Player {
 			p3.SetPos(10, 4);
 			p4.SetPos(13, 4);
 			
+			p1.SetStartGamePos(10, 1);
+			p2.SetStartGamePos(13, 1);
+			p3.SetStartGamePos(10, 4);
+			p4.SetStartGamePos(13, 4);
+			
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(8, 1);
@@ -84,6 +94,11 @@ public class Player {
 			p3.SetPos(1, 13);
 			p4.SetPos(4, 13);
 			
+			p1.SetStartGamePos(1, 10);
+			p2.SetStartGamePos(4, 10);
+			p3.SetStartGamePos(1, 13);
+			p4.SetStartGamePos(4, 13);
+			
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(6, 13);
@@ -101,6 +116,11 @@ public class Player {
 			p2.SetPos(13, 10);
 			p3.SetPos(10, 13);
 			p4.SetPos(13, 13);
+			
+			p1.SetStartGamePos(10, 10);
+			p2.SetStartGamePos(13, 10);
+			p3.SetStartGamePos(10, 13);
+			p4.SetStartGamePos(13, 13);
 			
 			for(Peao p : pecas )
 			{

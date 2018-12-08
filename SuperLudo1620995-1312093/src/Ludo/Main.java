@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) {
 		Janela j = new Janela();
 		Menu m = Menu.getInstance();
-		Tabuleiro t = new Tabuleiro();
+		Tabuleiro t = Tabuleiro.getInstance();
 		j.add(m);
 		j.add(t);
 		j.repaint();

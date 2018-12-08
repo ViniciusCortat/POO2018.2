@@ -19,6 +19,8 @@ public class Menu extends JPanel {
 	
 	int dado;
 	
+	public boolean wait;
+	
 	int turno = 0;
 	
 	private BufferedImage _dadoImagem;
@@ -31,12 +33,29 @@ public class Menu extends JPanel {
 	}
 	
 	public Menu() {
+		wait = true;
 		_dadoImagem = null;
 		setLayout(null);
 		repaint();
 		setBounds(901, 0, 293, 902);
 		novo_jogo.setBounds(30, 60, 240, 60);
 		add(novo_jogo);
+		novo_jogo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				turno = 0;
+				for(int i = 0; i < 4; i++) {
+					for(int j = 0; j < 4;j++) {
+						Tabuleiro.getInstance().ListPlayers.get(i).pecas.get(j).SetPos(
+								Tabuleiro.getInstance().ListPlayers.get(i).pecas.get(j).GetStartGamePosX()
+								, Tabuleiro.getInstance().ListPlayers.get(i).pecas.get(j).GetStartGamePosY());
+					}
+				}
+				wait = true;
+				lanca_dado.setEnabled(true);
+				repaint();
+				Tabuleiro.getInstance().repaint();
+			}
+			});
 		carrega_jogo.setBounds(30, 150, 240, 60);
 		add(carrega_jogo);
 		salva_jogo.setBounds(30, 240, 240, 60);
@@ -91,6 +110,7 @@ public class Menu extends JPanel {
 						e1.printStackTrace();
 					}
 				}
+				wait = false;
 				lanca_dado.setEnabled(false);
 				repaint();
 			}

@@ -7,6 +7,15 @@ import javax.swing.*;
 
 public class Tabuleiro extends JPanel {
 	
+	private static Tabuleiro instance = null;
+	
+	public static  Tabuleiro getInstance() {
+		if(instance == null) {
+			instance = new Tabuleiro();
+		}
+		return instance;
+	}
+	
 	private int Largura = 360;
 	private int Altura = 360;
 	private Casas _casas;
@@ -100,8 +109,9 @@ public class Tabuleiro extends JPanel {
 				
 				// Movement Starts Here
 				Peao clickP = ListPlayers.get(Menu.getInstance().turno).GetPeao(mouseX,mouseY);
-				if(clickP != null)
+				if(clickP != null && Menu.getInstance().wait == false)
 				{
+					Menu.getInstance().wait = true;
 					Menu.getInstance().turno++;
 					if(Menu.getInstance().turno >= 4)
 						Menu.getInstance().turno = 0;
@@ -137,6 +147,7 @@ public class Tabuleiro extends JPanel {
 				}
 			}
 		});
+		Menu.getInstance().repaint();
 		repaint();
 	}
 	
