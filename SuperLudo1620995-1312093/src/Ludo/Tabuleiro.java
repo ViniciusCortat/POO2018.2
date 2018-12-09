@@ -542,7 +542,7 @@ public class Tabuleiro extends JPanel {
 						   (play1.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
 						   play1.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
 							
-							g.setColor(Color.BLUE);
+							g.setColor(Color.YELLOW);
 							g.fillOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
@@ -569,12 +569,12 @@ public class Tabuleiro extends JPanel {
 						   (play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
 						   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
 							
-							g.setColor(Color.BLUE);
+							g.setColor(Color.GREEN);
 							g.fillOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play3.pecas.get(i).GetPosX()*60+10, play3.pecas.get(i).GetPosY()*60+10, 40, 40);
 							
-							g.setColor(Color.RED);
+							g.setColor(Color.BLUE);
 							g.fillOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30);
@@ -596,12 +596,12 @@ public class Tabuleiro extends JPanel {
 						   (play2.pecas.get(i).GetPosX() == abrigos.get(d).posX &&
 						   play2.pecas.get(i).GetPosY() == abrigos.get(d).posY)) {
 							
-							g.setColor(Color.BLUE);
+							g.setColor(Color.GREEN);
 							g.fillOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
 							
-							g.setColor(Color.RED);
+							g.setColor(Color.YELLOW);
 							g.fillOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play2.pecas.get(i).GetPosX()*60+15, play2.pecas.get(i).GetPosY()*60+15, 30, 30);
@@ -628,7 +628,7 @@ public class Tabuleiro extends JPanel {
 							g.setColor(Color.BLACK);			
 							g.drawOval(play4.pecas.get(i).GetPosX()*60+10, play4.pecas.get(i).GetPosY()*60+10, 40, 40);
 							
-							g.setColor(Color.RED);
+							g.setColor(Color.YELLOW);
 							g.fillOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30); 
 							g.setColor(Color.BLACK);			
 							g.drawOval(play3.pecas.get(i).GetPosX()*60+15, play3.pecas.get(i).GetPosY()*60+15, 30, 30);
