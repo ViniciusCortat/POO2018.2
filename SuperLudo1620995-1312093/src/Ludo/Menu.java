@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -61,15 +62,15 @@ public class Menu extends JPanel {
 		add(carrega_jogo);
 		salva_jogo.setBounds(30, 240, 240, 60);
 		add(salva_jogo);
+		salva_jogo.addActionListener(e-> save());
 		lanca_dado.setBounds(30, 570, 240, 60);
 		add(lanca_dado);
 		lanca_dado.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
 				Random rand = new Random();
-				dado = rand.nextInt(6) + 1; // THIS SHOULD BE TURNED ON
-				//dado = 5;
-				System.out.println(dado);/*
+				dado = rand.nextInt(6) + 1;
+				System.out.println(dado);
 				if(dado == 1) {
 					try {
 						_dadoImagem = ImageIO.read(getClass().getResourceAsStream("/Dado1.png"));
@@ -111,9 +112,42 @@ public class Menu extends JPanel {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}*/
+				}
 				wait = false;
 				lanca_dado.setEnabled(false);
+				if(dado == 5) {
+					for(int j = 0; j < 4; j++) {
+						if(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov == true) {
+							Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).SetPos
+							(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).casaIniX,
+							 Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).casaIniY);
+							Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov = false;
+							wait = true;
+							turno++;
+							if(turno >= 4)
+								turno = 0;
+							lanca_dado.setEnabled(true);
+							Tabuleiro.getInstance().repaint();
+							break;
+						}
+					}
+				
+				}
+				else {
+					for(int j = 0; j < 4; j++) {
+						if(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov == false) {
+							break;
+						}
+						if(j == 3) {
+							wait = true;
+							turno++;
+							if(turno >= 4)
+							turno = 0;
+							lanca_dado.setEnabled(true);
+							Tabuleiro.getInstance().repaint();
+						}
+					}
+				}
 				repaint();
 			}
 		});
@@ -124,23 +158,15 @@ public class Menu extends JPanel {
 		setBackground(Color.GRAY);
 		if(turno == 0) {
 			g.setColor(Color.RED);
-
-			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 1) {
 			g.setColor(Color.GREEN);
-
-			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 2) {
 			g.setColor(Color.BLUE);
-
-			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 3) {
 			g.setColor(Color.YELLOW);
-
-			g.fillRect(50, 50, 80, 200);
 		}
 		if(_dadoImagem != null) {
 			g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);
@@ -148,4 +174,28 @@ public class Menu extends JPanel {
 		}
 	}
 	
+	private void save() {
+		JFileChooser file = new JFileChooser();
+		int retrival = file.showSaveDialog(null);
+		if(retrival == JFileChooser.APPROVE_OPTION) {
+			try(FileWriter fw = new FileWriter(file.getSelectedFile()+".txt")){
+				for(int i = 0;i < 4; i ++) {
+					for(int j = 0; j < 4; j++) {
+						fw.write(Tabuleiro.getInstance().ListPlayers.get(i).pecas.get(j).GetPosX()+ " " +
+					             Tabuleiro.getInstance().ListPlayers.get(i).pecas.get(j).GetPosY()+ " ");
+					}
+				}
+				if(wait == true)
+					fw.write("true");
+				else
+					fw.write("false");
+				if(lanca_dado.isEnabled() == true)
+					fw.write("true");
+				else
+					fw.write("false");
+			} catch(Exception ex ) {
+				ex.printStackTrace();
+			}
+		}
+	}
 }
