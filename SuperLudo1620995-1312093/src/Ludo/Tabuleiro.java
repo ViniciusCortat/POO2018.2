@@ -20,10 +20,10 @@ public class Tabuleiro extends JPanel {
 	private int Altura = 360;
 	private Casas _casas;
 	
-	Player play1 = new Player(1);
-	Player play2 = new Player(2);
-	Player play3 = new Player(3);
-	Player play4 = new Player(4);
+	Player play1 = new Player(0);
+	Player play2 = new Player(1);
+	Player play3 = new Player(2);
+	Player play4 = new Player(3);
 	
 	public class Abrigo {
 		int posX;
@@ -128,8 +128,13 @@ public class Tabuleiro extends JPanel {
 						}
 					else if(!clickP.PrimeiroMov)
 					{
+						moveloop:
 						for(int i = 0;i < ValorDoDado;i++)
 						{
+							if( i == 0 )
+							{
+								clickP.SetBackup(clickP.GetPosX(), clickP.GetPosY());
+							}
 							clickP.Move(1);
 							if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -2)
 							{
@@ -146,19 +151,51 @@ public class Tabuleiro extends JPanel {
 								{
 									clickP.ChangeDirClock();
 								}
-							}							
-						}
-						for(Player pl : ListPlayers)
-						{
-							if(pl.cor != Menu.getInstance().turno)
+							}
+							for(Abrigo b : abrigos)
 							{
+								if(b.posX == clickP.GetPosX() && b.posY == clickP.GetPosY())
+								{
+									if(b.abr)
+									{
+										clickP.ResetToBackup();
+										break moveloop;
+									}
+								}
+							}
+							for(Player pl : ListPlayers)
+							{
+								if(pl.bar1.posX == clickP.GetPosX() && pl.bar1.posY == clickP.GetPosY())
+								{
+									if(pl.bar1.bar == true)
+									{
+										clickP.ResetToBackup();
+										break moveloop;
+									}
+								}
+								if(pl.bar2.posX == clickP.GetPosX() && pl.bar2.posY == clickP.GetPosY())
+								{
+									if(pl.bar2.bar == true)
+									{
+										clickP.ResetToBackup();
+										break moveloop;
+									}
+								}
+							}
+						}
+						
+						for(Player pl : ListPlayers)
+						{							
+							if(pl.cor != clickP.cor)
+							{								
 								Peao anotherP = pl.GetPeao(clickP.GetPosX(), clickP.GetPosY());
 								if(anotherP != null)
 								{
+									System.out.println(clickP.cor + "  CAPTUROU  " + anotherP.cor);
 									anotherP.MoveToIni();
 								}
 							}
-						}						
+						}			
 					}
 					
 					

@@ -44,7 +44,7 @@ public class Player {
 		pecas.add(p3);
 		pecas.add(p4);
 		
-		if(cor == 1) { 			
+		if(cor == 0) { 			
 			
 			p1.SetPos(1, 1);
 			p2.SetPos(4, 1);
@@ -60,6 +60,7 @@ public class Player {
 			{
 				p.SetCasaIni(1, 6);
 				p.SetStartDir(1);
+				p.cor = 0;
 			}
 			
 			inicioX = 1;
@@ -68,7 +69,7 @@ public class Player {
 			fimX = 6;
 			fimY = 7;
 		}
-		else if(cor == 2) { // GREEN
+		else if(cor == 1) { // GREEN
 			
 			p1.SetPos(10, 1);
 			p2.SetPos(13, 1);
@@ -84,6 +85,7 @@ public class Player {
 			{
 				p.SetCasaIni(8, 1);
 				p.SetStartDir(2);
+				p.cor = 1;
 			}
 			
 			inicioX = 8;
@@ -92,7 +94,7 @@ public class Player {
 			fimX = 7;
 			fimY = 6;
 		}
-		else if(cor == 3) { // BLUE
+		else if(cor == 2) { // BLUE
 			
 			p1.SetPos(1, 10);
 			p2.SetPos(4, 10);
@@ -108,6 +110,7 @@ public class Player {
 			{
 				p.SetCasaIni(6, 13);
 				p.SetStartDir(0);
+				p.cor = 2;
 			}
 			
 			inicioX = 6;
@@ -116,7 +119,7 @@ public class Player {
 			fimX = 7;
 			fimY = 8;
 		}
-		else if(cor == 4) { // YELLOW
+		else if(cor == 3) { // YELLOW
 			
 			p1.SetPos(10, 10);
 			p2.SetPos(13, 10);
@@ -132,6 +135,7 @@ public class Player {
 			{
 				p.SetCasaIni(13, 8);
 				p.SetStartDir(3);
+				p.cor = 3;
 			}
 			
 			inicioX = 13;

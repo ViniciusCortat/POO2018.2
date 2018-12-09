@@ -10,6 +10,8 @@ public class Peao {
 	private int StartGamePosY;
 	
 	public boolean PrimeiroMov;
+	
+	private int StartDir;
 	private int CurrentDir;
 	
 	private ArrayList<Direction> Dirs = new ArrayList<Direction>(4);
@@ -17,6 +19,11 @@ public class Peao {
 	
 	int casaIniX;
 	int casaIniY;
+	
+	private int MovBackupX;
+	private int MovBackupY;
+	
+	public int cor;
 	
 	public Peao(int x,int y,int casaIniX,int casaIniY) 
 	{
@@ -65,10 +72,24 @@ public class Peao {
 		}
 	}
 	
+	
+	
 	public void SetPos(int x,int y)
 	{
 		this.posX = x;
 		this.posY = y;
+	}
+	
+	public void SetBackup(int x, int y)
+	{
+		this.MovBackupX = x;
+		this.MovBackupY = y;
+	}
+	
+	public void ResetToBackup()
+	{
+		System.out.println("BACKUP");
+		this.SetPos(MovBackupX, MovBackupY);
 	}
 	
 	public void SetCasaIni(int x, int y)
@@ -78,6 +99,12 @@ public class Peao {
 	}
 	
 	public void SetStartDir(int dir)
+	{
+		this.StartDir = dir;
+		SetDir(this.StartDir);
+	}
+	
+	public void SetDir(int dir)
 	{
 		this.CurrentDir = dir;
 	}
@@ -133,25 +160,26 @@ public class Peao {
 	
 	public void Move(int moveQtd) 
 	{
+		
 		if(PrimeiroMov)
-		{
-			
+		{			
 			System.out.println("CINI" + this.casaIniX + "," + this.casaIniY);
 			SetPos(this.casaIniX,this.casaIniY);
 			this.PrimeiroMov = false;
 		}
 		else
 		{
-			System.out.println("MOV NORMAL");
+			System.out.println("\n\nMOV NORMAL");
 			SetPos(GetPosX() + (moveQtd * Dirs.get(CurrentDir).GetDirX()),GetPosY() + moveQtd * Dirs.get(CurrentDir).GetDirY());
 			qtdWalked += moveQtd;
-			System.out.println("CINI" + this.GetPosX() + "," + this.GetPosY());
+			System.out.println("DIRECT "+ CurrentDir + ">>>" + Dirs.get(CurrentDir).GetDirX() + "::" + Dirs.get(CurrentDir).GetDirY());
 		}
 	}
 	public void MoveToIni() 
 	{
 			System.out.println("BACK TO START" + this.casaIniX + "," + this.casaIniY);
 			SetPos(this.casaIniX,this.casaIniY);
+			SetDir(this.StartDir);
 			this.PrimeiroMov = false;
 	}
 }
