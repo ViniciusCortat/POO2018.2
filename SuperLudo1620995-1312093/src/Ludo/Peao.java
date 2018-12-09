@@ -133,14 +133,16 @@ public class Peao {
 	
 	public void Move(int moveQtd) 
 	{
-		System.out.println("PM" + PrimeiroMov);
 		if(PrimeiroMov)
 		{
+			
 			System.out.println("CINI" + this.casaIniX + "," + this.casaIniY);
 			SetPos(this.casaIniX,this.casaIniY);
+			this.PrimeiroMov = false;
 		}
 		else
 		{
+			System.out.println("MOV NORMAL");
 			SetPos(GetPosX() + (moveQtd * Dirs.get(CurrentDir).GetDirX()),GetPosY() + moveQtd * Dirs.get(CurrentDir).GetDirY());
 			qtdWalked += moveQtd;
 			System.out.println("CINI" + this.GetPosX() + "," + this.GetPosY());

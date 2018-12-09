@@ -54,6 +54,7 @@ public class Menu extends JPanel {
 				lanca_dado.setEnabled(true);
 				repaint();
 				Tabuleiro.getInstance().repaint();
+				System.out.println("New GAME");
 			}
 			});
 		carrega_jogo.setBounds(30, 150, 240, 60);
@@ -66,8 +67,9 @@ public class Menu extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e) {
 				Random rand = new Random();
-				dado = rand.nextInt(6) + 1;
-				System.out.println(dado);
+				dado = rand.nextInt(6) + 1; // THIS SHOULD BE TURNED ON
+				//dado = 5;
+				System.out.println(dado);/*
 				if(dado == 1) {
 					try {
 						_dadoImagem = ImageIO.read(getClass().getResourceAsStream("/Dado1.png"));
@@ -109,7 +111,7 @@ public class Menu extends JPanel {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}
+				}*/
 				wait = false;
 				lanca_dado.setEnabled(false);
 				repaint();
@@ -122,15 +124,23 @@ public class Menu extends JPanel {
 		setBackground(Color.GRAY);
 		if(turno == 0) {
 			g.setColor(Color.RED);
+
+			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 1) {
 			g.setColor(Color.GREEN);
+
+			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 2) {
 			g.setColor(Color.BLUE);
+
+			g.fillRect(50, 50, 80, 200);
 		}
 		else if(turno == 3) {
 			g.setColor(Color.YELLOW);
+
+			g.fillRect(50, 50, 80, 200);
 		}
 		if(_dadoImagem != null) {
 			g.fillRect(68, 673, _dadoImagem.getWidth()*3/2 + 20, _dadoImagem.getHeight()*3/2 + 20);

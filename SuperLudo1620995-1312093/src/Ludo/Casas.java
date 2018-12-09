@@ -95,7 +95,14 @@ public class Casas
 			Matrix[6][8] = -3;
 			
 			Matrix[8][6] = -3;
-			Matrix[8][8] = -3;			
+			Matrix[8][8] = -3;		
+			
+			Matrix[0][0] = -1;
+			Matrix[14][0] = -1;
+			Matrix[0][14] = -1;
+			Matrix[14][14] = -1;
+			
+			Matrix[7][7] = -5; // FINAL SQUARE
 	}
 	
 	public Integer GetDimension()

@@ -79,6 +79,7 @@ public class Player {
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(8, 1);
+				p.SetStartDir(2);
 			}
 			
 			inicioX = 8;
@@ -102,6 +103,7 @@ public class Player {
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(6, 13);
+				p.SetStartDir(0);
 			}
 			
 			inicioX = 6;
@@ -125,6 +127,7 @@ public class Player {
 			for(Peao p : pecas )
 			{
 				p.SetCasaIni(13, 8);
+				p.SetStartDir(3);
 			}
 			
 			inicioX = 13;

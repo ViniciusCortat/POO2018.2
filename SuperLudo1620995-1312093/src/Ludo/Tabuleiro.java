@@ -119,27 +119,37 @@ public class Tabuleiro extends JPanel {
 					System.out.println("PCLICK:  " + clickP.GetPosX() + "..." + clickP.GetPosX());
 					System.out.println("Turno: " + Menu.getInstance().turno);
 					//TESTING MOVE
-					for(int i = 0;i < 4;i++)
+					int ValorDoDado = Menu.getInstance().dado;
+					
+					if(clickP.PrimeiroMov && ValorDoDado == 5) 
+						{
+							clickP.Move(1);
+							System.out.println("ESSE É O VALOR DO DADO" + Menu.getInstance().dado);
+						}
+					else if(!clickP.PrimeiroMov)
 					{
-						clickP.Move(1);
-						if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -2)
+						for(int i = 0;i < ValorDoDado;i++)
 						{
-							clickP.ChangeDirClock();
-						}
-						else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -3)
-						{
-							clickP.ChangeDirCouClock();
-							i--;
-						}
-						else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -4)
-						{
-							if(clickP.GetQtdWalked() > 51)
+							clickP.Move(1);
+							if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -2)
 							{
 								clickP.ChangeDirClock();
 							}
-						}							
+							else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -3)
+							{
+								clickP.ChangeDirCouClock();
+								i--;
+							}
+							else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -4)
+							{
+								if(clickP.GetQtdWalked() > 51)
+								{
+									clickP.ChangeDirClock();
+								}
+							}							
+						}
 					}
-					if(clickP.PrimeiroMov) clickP.PrimeiroMov = false;
+					
 					
 				// Movement Ends Here
 					Menu.getInstance().repaint();
@@ -190,26 +200,34 @@ public class Tabuleiro extends JPanel {
 			int _posX = _row*60;
 			int _posY = _col*60;
 			
+			if(value == -5) // TEST CHANGE DIR
+			{
+				g.setColor(Color.ORANGE);
+				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				g.setColor(Color.BLACK);			
+				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
+			}
+			
 			if(value == -4) // TEST CHANGE DIR
 			{
-				g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				//g.setColor(Color.LIGHT_GRAY);
+				//g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
 				g.setColor(Color.BLACK);			
 				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
 			}
 			
 			if(value == -3) // TEST CHANGE DIR
 			{
-				g.setColor(Color.MAGENTA);
-				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				//g.setColor(Color.MAGENTA);
+				//g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
 				g.setColor(Color.BLACK);			
 				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
 			}
 			
 			if(value == -2) // TEST CHANGE DIR
 			{
-				g.setColor(Color.CYAN);
-				g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
+				//g.setColor(Color.CYAN);
+				//g.fillRect(_posY, _posX, 60, 60); // TODO why is this inverted ?
 				g.setColor(Color.BLACK);			
 				g.drawRect(_posY, _posX, 60, 60); //TODO why is this inverted too ???
 			}
@@ -262,6 +280,8 @@ public class Tabuleiro extends JPanel {
 				g.drawRect(_posX, _posY, 60, 60);
 			}
 		}
+		
+		////////
 		/*
 		g.setColor(Color.RED);
 		g.fillPolygon(RedTriX, RedTriY, 3); // Draw fill red Triag
