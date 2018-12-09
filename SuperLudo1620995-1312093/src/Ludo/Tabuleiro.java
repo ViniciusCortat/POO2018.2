@@ -148,6 +148,17 @@ public class Tabuleiro extends JPanel {
 								}
 							}							
 						}
+						for(Player pl : ListPlayers)
+						{
+							if(pl.cor != Menu.getInstance().turno)
+							{
+								Peao anotherP = pl.GetPeao(clickP.GetPosX(), clickP.GetPosY());
+								if(anotherP != null)
+								{
+									anotherP.MoveToIni();
+								}
+							}
+						}						
 					}
 					
 					

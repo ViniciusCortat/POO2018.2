@@ -23,6 +23,8 @@ public class Player {
 	int fimX;
 	int fimY;
 	
+	public int cor;
+	
 	List<Peao> pecas = new ArrayList<Peao>();
 
 	Peao p1 = new Peao();
@@ -35,6 +37,8 @@ public class Player {
 	
 	public Player(int cor) {
 
+		this.cor = cor;
+		
 		pecas.add(p1);
 		pecas.add(p2);
 		pecas.add(p3);

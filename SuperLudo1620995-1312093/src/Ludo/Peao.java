@@ -148,4 +148,10 @@ public class Peao {
 			System.out.println("CINI" + this.GetPosX() + "," + this.GetPosY());
 		}
 	}
+	public void MoveToIni() 
+	{
+			System.out.println("BACK TO START" + this.casaIniX + "," + this.casaIniY);
+			SetPos(this.casaIniX,this.casaIniY);
+			this.PrimeiroMov = false;
+	}
 }
