@@ -69,8 +69,9 @@ public class Menu extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e) {
 				Random rand = new Random();
-				dado = rand.nextInt(6) + 1;
-				System.out.println(dado);
+				//dado = rand.nextInt(6) + 1;
+				dado = 5;
+				System.out.println(dado);/*
 				if(dado == 1) {
 					try {
 						_dadoImagem = ImageIO.read(getClass().getResourceAsStream("/Dado1.png"));
@@ -112,16 +113,15 @@ public class Menu extends JPanel {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}
+				} */
 				wait = false;
 				lanca_dado.setEnabled(false);
 				if(dado == 5) {
 					for(int j = 0; j < 4; j++) {
-						if(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov == true) {
-							Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).SetPos
-							(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).casaIniX,
-							 Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).casaIniY);
-							Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov = false;
+						if(Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).PrimeiroMov == true) 
+						{							
+							Tabuleiro.getInstance().ListPlayers.get(turno).pecas.get(j).Move(0);
+							
 							wait = true;
 							turno++;
 							if(turno >= 4)
