@@ -3,14 +3,19 @@ package Ludo;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import controle.Observer;
+import controle.Subject;
+import desenho_regras.Menu;
+
 public class Player implements Subject
 {
 	private List<Observer> observers;
 	
 	public class Barrier {
-		int posX;
-		int posY;
-		boolean bar;
+		public int posX;
+		public int posY;
+		public boolean bar;
 		
 		public Barrier() {
 			posX = 50;
@@ -19,8 +24,8 @@ public class Player implements Subject
 		}
 	}
 	
-	int inicioX;
-	int inicioY;
+	public int inicioX;
+	public int inicioY;
 	
 	int fimX;
 	int fimY;
@@ -28,15 +33,15 @@ public class Player implements Subject
 	public int cor;
 	private int pontos;
 	
-	List<Peao> pecas = new ArrayList<Peao>();
+	public List<Peao> pecas = new ArrayList<Peao>();
 
 	Peao p1 = new Peao();
 	Peao p2 = new Peao();
 	Peao p3 = new Peao();
 	Peao p4 = new Peao();
 	
-	Barrier bar1 = new Barrier();
-	Barrier bar2 = new Barrier();
+	public Barrier bar1 = new Barrier();
+	public Barrier bar2 = new Barrier();
 	
 	public Player(int cor) {
 		

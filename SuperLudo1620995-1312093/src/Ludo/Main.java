@@ -1,5 +1,8 @@
 package Ludo;
 
+import desenho_regras.Menu;
+import desenho_regras.Tabuleiro;
+
 public class Main {
 	
 	public static void main(String[] args) {

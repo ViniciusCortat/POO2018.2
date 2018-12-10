@@ -17,8 +17,8 @@ public class Peao {
 	private ArrayList<Direction> Dirs = new ArrayList<Direction>(4);
 	private int qtdWalked;
 	
-	int casaIniX;
-	int casaIniY;
+	public int casaIniX;
+	public int casaIniY;
 	
 	private int MovBackupX;
 	private int MovBackupY;
@@ -136,6 +136,9 @@ public class Peao {
 	
 	public int GetStartGamePosY() {
 		return this.StartGamePosY;
+	}
+	public int GetCurrentDir() {
+		return this.CurrentDir;
 	}
 	
 		

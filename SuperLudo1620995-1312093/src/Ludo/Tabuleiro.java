@@ -1,9 +1,15 @@
-package Ludo;
+package desenho_regras;
 import java.awt.*;
+
+
 import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import Ludo.Casas;
+import Ludo.Peao;
+import Ludo.Player;
 
 public class Tabuleiro extends JPanel {
 	
@@ -342,8 +348,7 @@ public class Tabuleiro extends JPanel {
 			}
 		}
 		
-		////////
-		/*
+		
 		g.setColor(Color.RED);
 		g.fillPolygon(RedTriX, RedTriY, 3); // Draw fill red Triag
 		
@@ -355,7 +360,7 @@ public class Tabuleiro extends JPanel {
 		
 		g.setColor(Color.YELLOW);
 		g.fillPolygon(YellowTriX, YellowTriY, 3); // Draw fill green Triag
-		*/
+		
 		g.setColor(Color.BLACK);
 		g.drawPolygon(RedTriX, RedTriY, 3);
 		g.drawPolygon(BlueTriX, BlueTriY, 3);

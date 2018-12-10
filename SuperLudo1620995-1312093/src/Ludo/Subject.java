@@ -1,4 +1,4 @@
-package Ludo;
+package controle;
 
 public interface Subject 
 {
