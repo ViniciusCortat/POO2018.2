@@ -3,7 +3,9 @@ package Ludo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Subject
+{
+	private List<Observer> observers;
 	
 	public class Barrier {
 		int posX;
@@ -24,6 +26,7 @@ public class Player {
 	int fimY;
 	
 	public int cor;
+	private int pontos;
 	
 	List<Peao> pecas = new ArrayList<Peao>();
 
@@ -36,7 +39,10 @@ public class Player {
 	Barrier bar2 = new Barrier();
 	
 	public Player(int cor) {
-
+		
+		this.observers=new ArrayList<>();
+		register(Menu.getInstance());
+		
 		this.cor = cor;
 		
 		pecas.add(p1);
@@ -156,10 +162,22 @@ public class Player {
 		return null;		
 	}
 	
+	public void AddPoints()
+	{
+		pontos++;
+		if(pontos >= 4)
+		{
+			notifyObservers();
+		}
+	}	
+	
 	public boolean CheckBar(Barrier b) {
-		for(int i = 0; i < 4; i++) {
-			if(pecas.get(i).GetPosX() == b.posX && pecas.get(i).GetPosY() == b.posY) {
-				for(int j = 0; j < 4; j++) {
+		for(int i = 0; i < 4; i++) 
+		{
+			if(pecas.get(i).GetPosX() == b.posX && pecas.get(i).GetPosY() == b.posY) 			
+			{
+				for(int j = 0; j < 4; j++)
+				{
 					if(pecas.get(j).GetPosX() == b.posX && pecas.get(j).GetPosY() == b.posY && i != j) {
 						return true;
 					}
@@ -167,6 +185,38 @@ public class Player {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void register(Observer obj) 
+	{
+		if(obj == null) throw new NullPointerException("Null Observer");
+		
+		if(!observers.contains(obj)) observers.add(obj);
+	}
+
+	@Override
+	public void unregister(Observer obj)
+	{
+		if(obj == null) throw new NullPointerException("Null Observer");
+		
+		if(!observers.contains(obj)) observers.remove(obj);
+		
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		for(Observer obs : observers) 
+		{
+			obs.update();
+		}		
+	}
+
+	@Override
+	public Object getUpdate(Observer obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

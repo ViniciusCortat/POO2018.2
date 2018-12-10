@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class Menu extends JPanel {
+public class Menu extends JPanel implements Observer {
 	
 	 private static Menu instance = null;
 	
@@ -197,5 +197,18 @@ public class Menu extends JPanel {
 				ex.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void update() 
+	{
+		System.out.println("SOMEONE WON");
+		
+	}
+
+	@Override
+	public void setSubject(Subject sub) {
+		// TODO Auto-generated method stub
+		
 	}
 }

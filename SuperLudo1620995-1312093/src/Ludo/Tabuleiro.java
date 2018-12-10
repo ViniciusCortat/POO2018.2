@@ -49,6 +49,8 @@ public class Tabuleiro extends JPanel {
 	//square size must be 60x60
 	
 	public Tabuleiro() {
+		
+		
 		setLayout(null);
 		repaint();
 		setBounds(0, 0, 901,901);
@@ -111,6 +113,8 @@ public class Tabuleiro extends JPanel {
 				Peao clickP = ListPlayers.get(Menu.getInstance().turno).GetPeao(mouseX,mouseY);
 				if(clickP != null && Menu.getInstance().wait == false)
 				{
+					if(clickP.GetPosX() != 7 && clickP.GetPosY() != 7)
+					{
 					Menu.getInstance().wait = true;
 					Menu.getInstance().turno++;
 					if(Menu.getInstance().turno >= 4)
@@ -150,6 +154,14 @@ public class Tabuleiro extends JPanel {
 								if(clickP.GetQtdWalked() > 51)
 								{
 									clickP.ChangeDirClock();
+								}
+							}
+							else if(_casas.GetMatrixValue(clickP.GetPosX(),clickP.GetPosY()) == -5)
+							{
+								if(clickP.GetQtdWalked() > 51)
+								{
+									ListPlayers.get(Menu.getInstance().turno).AddPoints();
+									clickP.SetPos(7, 7);									
 								}
 							}
 							for(Abrigo b : abrigos)
@@ -203,6 +215,7 @@ public class Tabuleiro extends JPanel {
 					Menu.getInstance().repaint();
 					repaint();
 				}
+			}
 			}
 		});
 		Menu.getInstance().repaint();

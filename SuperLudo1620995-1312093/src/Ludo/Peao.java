@@ -72,8 +72,6 @@ public class Peao {
 		}
 	}
 	
-	
-	
 	public void SetPos(int x,int y)
 	{
 		this.posX = x;
@@ -117,6 +115,7 @@ public class Peao {
 			this.CurrentDir = 0;
 		}
 	}
+	
 	public void ChangeDirCouClock()
 	{
 		this.CurrentDir--;
@@ -125,13 +124,16 @@ public class Peao {
 			this.CurrentDir = 3;
 		}
 	}
+	
 	public void SetStartGamePos(int x, int y) {
 		this.StartGamePosX = x;
 		this.StartGamePosY = y;
 	}
+	
 	public int GetStartGamePosX() {
 		return this.StartGamePosX;
 	}
+	
 	public int GetStartGamePosY() {
 		return this.StartGamePosY;
 	}
